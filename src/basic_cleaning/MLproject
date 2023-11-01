@@ -5,18 +5,36 @@ entry_points:
   main:
     parameters:
 
-      input_artifacts:
-        description: ## ADD DESCRIPTION
+      input_artifact:
+        description: Name of the artifact 
         type: string
 
-      parameter2:
-        description: ## ADD DESCRIPTION
+      output_artifact:
+        description: Name of the clean artifact
         type: string
 
-      parameter3:
-        description: ## ADD DESCRIPTION
+      output_type:
+        description: Type of clean sample
+        type: string
+      
+      output_description:
+        description: Description of the preprocessed data
+        type: string
+
+      min_price:
+        description: Min Price for the prediction column
+        type: string
+      
+      max_price:
+        description: Max Price for the prediction column
         type: string
 
 
     command: >-
-        python run.py  --parameter1 {parameter1}  --parameter2 {parameter2}  --parameter3 {parameter3} 
+        python run.py  --input_artifact {input_artifact}  \
+                       --output_artifact {output_artifact}  \
+                       --output_type {output_type} \
+                       --output_description {output_description} \
+                       --min_price {min_price} \
+                       --max_price {max_price}
+
