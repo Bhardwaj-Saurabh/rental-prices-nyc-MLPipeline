@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/60f7f4edb5424da487c71fd7b9520433/artifacts
+end_time: 1698964116576
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 60f7f4edb5424da487c71fd7b9520433
+run_name: wise-steed-128
+run_uuid: 60f7f4edb5424da487c71fd7b9520433
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698963934394
+status: 3
+tags: []
+user_id: saurabhbhardwaj
