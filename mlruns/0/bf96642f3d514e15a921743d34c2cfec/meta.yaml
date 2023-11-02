@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/bf96642f3d514e15a921743d34c2cfec/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: bf96642f3d514e15a921743d34c2cfec
+run_name: handsome-foal-811
+run_uuid: bf96642f3d514e15a921743d34c2cfec
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698875574631
+status: 1
+tags: []
+user_id: saurabhbhardwaj

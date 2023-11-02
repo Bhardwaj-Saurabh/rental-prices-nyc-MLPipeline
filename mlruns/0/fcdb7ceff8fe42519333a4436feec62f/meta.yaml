@@ -1,0 +1,16 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/fcdb7ceff8fe42519333a4436feec62f/artifacts
+deleted_time: null
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: fcdb7ceff8fe42519333a4436feec62f
+run_name: luxuriant-shad-118
+run_uuid: fcdb7ceff8fe42519333a4436feec62f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698878644646
+status: 1
+tags: []
+user_id: saurabhbhardwaj

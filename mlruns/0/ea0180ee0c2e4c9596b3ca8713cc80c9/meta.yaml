@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/ea0180ee0c2e4c9596b3ca8713cc80c9/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: ea0180ee0c2e4c9596b3ca8713cc80c9
+run_name: victorious-mare-813
+run_uuid: ea0180ee0c2e4c9596b3ca8713cc80c9
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698860569266
+status: 1
+tags: []
+user_id: saurabhbhardwaj

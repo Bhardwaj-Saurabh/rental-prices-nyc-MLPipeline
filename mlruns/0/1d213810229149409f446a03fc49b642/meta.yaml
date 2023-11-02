@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/1d213810229149409f446a03fc49b642/artifacts
+end_time: 1698882804467
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 1d213810229149409f446a03fc49b642
+run_name: whimsical-kite-78
+run_uuid: 1d213810229149409f446a03fc49b642
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698882731990
+status: 4
+tags: []
+user_id: saurabhbhardwaj

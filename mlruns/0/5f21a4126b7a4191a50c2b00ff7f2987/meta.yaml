@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/5f21a4126b7a4191a50c2b00ff7f2987/artifacts
+end_time: 1698885300249
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 5f21a4126b7a4191a50c2b00ff7f2987
+run_name: delicate-hound-489
+run_uuid: 5f21a4126b7a4191a50c2b00ff7f2987
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698885284132
+status: 4
+tags: []
+user_id: saurabhbhardwaj

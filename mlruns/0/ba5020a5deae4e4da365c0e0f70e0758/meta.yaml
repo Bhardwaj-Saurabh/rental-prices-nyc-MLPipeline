@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/ba5020a5deae4e4da365c0e0f70e0758/artifacts
+end_time: 1698884641315
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: ba5020a5deae4e4da365c0e0f70e0758
+run_name: gaudy-hog-124
+run_uuid: ba5020a5deae4e4da365c0e0f70e0758
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698884620615
+status: 4
+tags: []
+user_id: saurabhbhardwaj

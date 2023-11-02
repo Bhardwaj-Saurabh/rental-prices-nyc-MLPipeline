@@ -1,0 +1,44 @@
+{
+    "os": "macOS-14.0-arm64-arm-64bit",
+    "python": "3.11.6",
+    "heartbeatAt": "2023-11-02T01:02:48.036361",
+    "startedAt": "2023-11-02T01:02:47.508698",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "clean_sample.csv:latest",
+        "0.2",
+        "--random_seed",
+        "42",
+        "--stratify_by",
+        "neighbourhood_group"
+    ],
+    "state": "running",
+    "program": "/Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/components/train_val_test_split/run.py",
+    "codePathLocal": "run.py",
+    "codePath": "components/train_val_test_split/run.py",
+    "git": {
+        "remote": "https://github.com/Bhardwaj-Saurabh/rental-prices-nyc-MLPipeline.git",
+        "commit": "902c076efb61871535405ae0d87596bd1ed37a26"
+    },
+    "email": "aryan.saurabhbhardwaj@gmail.com",
+    "root": "/Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline",
+    "host": "MacBook-Pro.local",
+    "username": "saurabhbhardwaj",
+    "executable": "/Users/saurabhbhardwaj/anaconda3/envs/mlflow-97cd0c3856bddf2b1127e23c721f45e51405b684/bin/python",
+    "cpu_count": 10,
+    "cpu_count_logical": 10,
+    "disk": {
+        "/": {
+            "total": 926.3517189025879,
+            "used": 667.3627471923828
+        }
+    },
+    "gpuapple": {
+        "type": "arm",
+        "vendor": "Apple"
+    },
+    "memory": {
+        "total": 16.0
+    }
+}
