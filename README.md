@@ -567,7 +567,6 @@ you have trained your new model on the new data.
 ## Final project 
 [rental-prices-nyc-MLPipeline - Weight&Biases](https://wandb.ai/aryansaurabhbhardwaj/nyc_airbnb)
 
-
 ## License
 
 [License](LICENSE.txt)
