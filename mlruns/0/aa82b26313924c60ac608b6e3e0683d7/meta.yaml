@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/aa82b26313924c60ac608b6e3e0683d7/artifacts
+end_time: 1698941148311
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: aa82b26313924c60ac608b6e3e0683d7
+run_name: carefree-turtle-942
+run_uuid: aa82b26313924c60ac608b6e3e0683d7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698941127500
+status: 3
+tags: []
+user_id: saurabhbhardwaj

@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/12bd9bc6753d4d4aade1a7cbc1d13a07/artifacts
+end_time: 1698943041030
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 12bd9bc6753d4d4aade1a7cbc1d13a07
+run_name: honorable-shoat-946
+run_uuid: 12bd9bc6753d4d4aade1a7cbc1d13a07
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698943019226
+status: 3
+tags: []
+user_id: saurabhbhardwaj

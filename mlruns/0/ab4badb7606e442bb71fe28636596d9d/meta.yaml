@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/ab4badb7606e442bb71fe28636596d9d/artifacts
+end_time: 1698938641652
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: ab4badb7606e442bb71fe28636596d9d
+run_name: bustling-swan-98
+run_uuid: ab4badb7606e442bb71fe28636596d9d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698938612178
+status: 3
+tags: []
+user_id: saurabhbhardwaj

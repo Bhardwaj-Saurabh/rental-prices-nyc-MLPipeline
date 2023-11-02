@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/cadf130e381543f88a10aae838d88b40/artifacts
+end_time: 1698891627763
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: cadf130e381543f88a10aae838d88b40
+run_name: unleashed-jay-488
+run_uuid: cadf130e381543f88a10aae838d88b40
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698891589992
+status: 3
+tags: []
+user_id: saurabhbhardwaj

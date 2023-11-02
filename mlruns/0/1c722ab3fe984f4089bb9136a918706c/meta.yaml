@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/1c722ab3fe984f4089bb9136a918706c/artifacts
+end_time: 1698940083972
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 1c722ab3fe984f4089bb9136a918706c
+run_name: rogue-crab-538
+run_uuid: 1c722ab3fe984f4089bb9136a918706c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698940051354
+status: 3
+tags: []
+user_id: saurabhbhardwaj

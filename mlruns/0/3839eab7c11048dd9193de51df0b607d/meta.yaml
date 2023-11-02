@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/3839eab7c11048dd9193de51df0b607d/artifacts
+end_time: 1698944631537
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 3839eab7c11048dd9193de51df0b607d
+run_name: flawless-fawn-916
+run_uuid: 3839eab7c11048dd9193de51df0b607d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698944603474
+status: 3
+tags: []
+user_id: saurabhbhardwaj

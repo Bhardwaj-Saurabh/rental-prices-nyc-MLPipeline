@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/96b184f1a383455ca6ddc4cb383cd9ce/artifacts
+end_time: 1698940454986
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 96b184f1a383455ca6ddc4cb383cd9ce
+run_name: shivering-moth-509
+run_uuid: 96b184f1a383455ca6ddc4cb383cd9ce
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698940422517
+status: 3
+tags: []
+user_id: saurabhbhardwaj

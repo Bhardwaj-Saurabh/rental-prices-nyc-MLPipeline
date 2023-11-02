@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/d7b1199cb55040fb98e11e8589afd21e/artifacts
+end_time: 1698941558455
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: d7b1199cb55040fb98e11e8589afd21e
+run_name: unleashed-panda-28
+run_uuid: d7b1199cb55040fb98e11e8589afd21e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698941513232
+status: 3
+tags: []
+user_id: saurabhbhardwaj

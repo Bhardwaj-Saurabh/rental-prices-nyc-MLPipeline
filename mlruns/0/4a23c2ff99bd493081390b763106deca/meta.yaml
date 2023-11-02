@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/4a23c2ff99bd493081390b763106deca/artifacts
+end_time: 1698944285969
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 4a23c2ff99bd493081390b763106deca
+run_name: polite-mink-20
+run_uuid: 4a23c2ff99bd493081390b763106deca
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698944199654
+status: 3
+tags: []
+user_id: saurabhbhardwaj

@@ -1,0 +1,334 @@
+diff --git a/config.yaml b/config.yaml
+index 39ca048..3eca471 100644
+--- a/config.yaml
++++ b/config.yaml
+@@ -32,7 +32,7 @@ modeling:
+     min_samples_leaf: 3
+     # Here -1 means all available cores
+     n_jobs: -1
+-    criterion: mae
++    criterion: absolute_error
+     max_features: 0.5
+     # DO not change the following
+     oob_score: true
+diff --git a/environment.yml b/environment.yml
+index 6cfa2cf..21a2568 100644
+--- a/environment.yml
++++ b/environment.yml
+@@ -11,6 +11,7 @@ dependencies:
+   - hydra-core=1.3.2
+   - matplotlib=3.8.0
+   - pandas=1.3.5
++  - pandas-profiling=3.1.0 
+   - git=2.42.0
+   - pip=23.3.1
+   - pip:
+diff --git a/main.py b/main.py
+index 0d2c490..79cc6c2 100644
+--- a/main.py
++++ b/main.py
+@@ -97,14 +97,21 @@ def go(config: DictConfig):
+             with open(rf_config, "w+") as fp:
+                 json.dump(dict(config["modeling"]["random_forest"].items()), fp)  # DO NOT TOUCH
+ 
+-            # NOTE: use the rf_config we just created as the rf_config parameter for the train_random_forest
+-            # step
+-
+-            ##################
+-            # Implement here #
+-            ##################
+-
+-            pass
++            # model training
++            _ = mlflow.run(
++                os.path.join(root_path, 
++                             "src", 
++                             "train_random_forest"),
++                "main",
++                parameters={
++                    "trainval_artifact": "trainval_data.csv:latest",
++                    "val_size": config['modeling']['val_size'],
++                    "stratify_by": config['modeling']['stratify_by'],
++                    "rf_config": rf_config,
++                    "max_tfidf_features": config['modeling']['max_tfidf_features'],
++                    "output_artifact": "random_forest_export",
++                },
++            )
+ 
+         if "test_regression_model" in active_steps:
+ 
+diff --git a/src/eda/EDA.ipynb b/src/eda/EDA.ipynb
+index 5dc31ca..2aeec85 100644
+--- a/src/eda/EDA.ipynb
++++ b/src/eda/EDA.ipynb
+@@ -29,7 +29,7 @@
+     {
+      "data": {
+       "text/html": [
+-       "Run data is saved locally in <code>/Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/src/eda/wandb/run-20231101_224619-zlixnfqs</code>"
++       "Run data is saved locally in <code>/Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/src/eda/wandb/run-20231102_121502-i2lecce9</code>"
+       ],
+       "text/plain": [
+        "<IPython.core.display.HTML object>"
+@@ -41,7 +41,7 @@
+     {
+      "data": {
+       "text/html": [
+-       "Syncing run <strong><a href='https://wandb.ai/aryansaurabhbhardwaj/nyc_airbnb/runs/zlixnfqs' target=\"_blank\">exalted-blaze-13</a></strong> to <a href='https://wandb.ai/aryansaurabhbhardwaj/nyc_airbnb' target=\"_blank\">Weights & Biases</a> (<a href='https://wandb.me/run' target=\"_blank\">docs</a>)<br/>"
++       "Syncing run <strong><a href='https://wandb.ai/aryansaurabhbhardwaj/nyc_airbnb/runs/i2lecce9' target=\"_blank\">revived-monkey-37</a></strong> to <a href='https://wandb.ai/aryansaurabhbhardwaj/nyc_airbnb' target=\"_blank\">Weights & Biases</a> (<a href='https://wandb.me/run' target=\"_blank\">docs</a>)<br/>"
+       ],
+       "text/plain": [
+        "<IPython.core.display.HTML object>"
+@@ -65,7 +65,7 @@
+     {
+      "data": {
+       "text/html": [
+-       " View run at <a href='https://wandb.ai/aryansaurabhbhardwaj/nyc_airbnb/runs/zlixnfqs' target=\"_blank\">https://wandb.ai/aryansaurabhbhardwaj/nyc_airbnb/runs/zlixnfqs</a>"
++       " View run at <a href='https://wandb.ai/aryansaurabhbhardwaj/nyc_airbnb/runs/i2lecce9' target=\"_blank\">https://wandb.ai/aryansaurabhbhardwaj/nyc_airbnb/runs/i2lecce9</a>"
+       ],
+       "text/plain": [
+        "<IPython.core.display.HTML object>"
+@@ -78,7 +78,7 @@
+      "name": "stdout",
+      "output_type": "stream",
+      "text": [
+-      "Error in callback <bound method _WandbInit._pause_backend of <wandb.sdk.wandb_init._WandbInit object at 0x11287e200>> (for post_run_cell), with arguments args (<ExecutionResult object at 11287fa00, execution_count=1 error_before_exec=None error_in_exec=None info=<ExecutionInfo object at 11291ebc0, raw_cell=\" import wandb\n",
++      "Error in callback <bound method _WandbInit._pause_backend of <wandb.sdk.wandb_init._WandbInit object at 0x1065c2140>> (for post_run_cell), with arguments args (<ExecutionResult object at 1065c39a0, execution_count=1 error_before_exec=None error_in_exec=None info=<ExecutionInfo object at 10666d750, raw_cell=\" import wandb\n",
+       " import pandas as pd\n",
+       "\n",
+       " run = wandb.i..\" store_history=True silent=False shell_futures=True cell_id=54b1294a-a341-404d-a44e-c1714862560a> result=None>,),kwargs {}:\n"
+@@ -114,7 +114,7 @@
+      "name": "stdout",
+      "output_type": "stream",
+      "text": [
+-      "Error in callback <bound method _WandbInit._resume_backend of <wandb.sdk.wandb_init._WandbInit object at 0x11287e200>> (for pre_run_cell), with arguments args (<ExecutionInfo object at 17e8ac400, raw_cell=\"df.head()\" store_history=True silent=False shell_futures=True cell_id=cd7df64e-82f7-4d31-94b1-7eb6c34f276b>,),kwargs {}:\n"
++      "Error in callback <bound method _WandbInit._resume_backend of <wandb.sdk.wandb_init._WandbInit object at 0x1065c2140>> (for pre_run_cell), with arguments args (<ExecutionInfo object at 17baf4460, raw_cell=\"df.head()\" store_history=True silent=False shell_futures=True cell_id=cd7df64e-82f7-4d31-94b1-7eb6c34f276b>,),kwargs {}:\n"
+      ]
+     },
+     {
+@@ -304,7 +304,7 @@
+      "name": "stdout",
+      "output_type": "stream",
+      "text": [
+-      "Error in callback <bound method _WandbInit._pause_backend of <wandb.sdk.wandb_init._WandbInit object at 0x11287e200>> (for post_run_cell), with arguments args (<ExecutionResult object at 17e8ac3d0, execution_count=2 error_before_exec=None error_in_exec=None info=<ExecutionInfo object at 17e8ac400, raw_cell=\"df.head()\" store_history=True silent=False shell_futures=True cell_id=cd7df64e-82f7-4d31-94b1-7eb6c34f276b> result=         id                                               name    host_id  \\\n",
++      "Error in callback <bound method _WandbInit._pause_backend of <wandb.sdk.wandb_init._WandbInit object at 0x1065c2140>> (for post_run_cell), with arguments args (<ExecutionResult object at 17baf43a0, execution_count=2 error_before_exec=None error_in_exec=None info=<ExecutionInfo object at 17baf4460, raw_cell=\"df.head()\" store_history=True silent=False shell_futures=True cell_id=cd7df64e-82f7-4d31-94b1-7eb6c34f276b> result=         id                                               name    host_id  \\\n",
+       "0   9138664                Private Lg Room 15 min to Manhattan   47594947   \n",
+       "1  31444015  TIME SQUARE CHARMING ONE BED IN HELL'S KITCHEN...    8523790   \n",
+       "2   8741020  Voted #1 Location Quintessential 1BR W Village...   45854238   \n",
+@@ -350,7 +350,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 4,
++   "execution_count": 3,
+    "id": "5df11797-a040-4828-89bc-be026819c5dc",
+    "metadata": {},
+    "outputs": [
+@@ -358,7 +358,7 @@
+      "name": "stdout",
+      "output_type": "stream",
+      "text": [
+-      "Error in callback <bound method _WandbInit._resume_backend of <wandb.sdk.wandb_init._WandbInit object at 0x144d0ac50>> (for pre_run_cell), with arguments args (<ExecutionInfo object at 144c9cfa0, raw_cell=\"import pandas_profiling\n",
++      "Error in callback <bound method _WandbInit._resume_backend of <wandb.sdk.wandb_init._WandbInit object at 0x1065c2140>> (for pre_run_cell), with arguments args (<ExecutionInfo object at 17baf7ee0, raw_cell=\"import pandas_profiling\n",
+       "\n",
+       "profile = pandas_profilin..\" store_history=True silent=False shell_futures=True cell_id=5df11797-a040-4828-89bc-be026819c5dc>,),kwargs {}:\n"
+      ]
+@@ -377,9 +377,9 @@
+      "name": "stderr",
+      "output_type": "stream",
+      "text": [
+-      "/Users/saurabhbhardwaj/anaconda3/envs/mlflow-7ef135bbcfcbd50378f5beb8451f0dddc0913a0e/lib/python3.10/site-packages/numba/core/decorators.py:262: NumbaDeprecationWarning: \u001b[1mnumba.generated_jit is deprecated. Please see the documentation at: https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-generated-jit for more information and advice on a suitable replacement.\u001b[0m\n",
++      "/Users/saurabhbhardwaj/anaconda3/envs/mlflow-d89679cc87f5287bd6d1873707f52fe35f32fe7f/lib/python3.10/site-packages/numba/core/decorators.py:262: NumbaDeprecationWarning: \u001b[1mnumba.generated_jit is deprecated. Please see the documentation at: https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-generated-jit for more information and advice on a suitable replacement.\u001b[0m\n",
+       "  warnings.warn(msg, NumbaDeprecationWarning)\n",
+-      "/Users/saurabhbhardwaj/anaconda3/envs/mlflow-7ef135bbcfcbd50378f5beb8451f0dddc0913a0e/lib/python3.10/site-packages/visions/backends/shared/nan_handling.py:51: NumbaDeprecationWarning: \u001b[1mThe 'nopython' keyword argument was not supplied to the 'numba.jit' decorator. The implicit default value for this argument is currently False, but it will be changed to True in Numba 0.59.0. See https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit for details.\u001b[0m\n",
++      "/Users/saurabhbhardwaj/anaconda3/envs/mlflow-d89679cc87f5287bd6d1873707f52fe35f32fe7f/lib/python3.10/site-packages/visions/backends/shared/nan_handling.py:51: NumbaDeprecationWarning: \u001b[1mThe 'nopython' keyword argument was not supplied to the 'numba.jit' decorator. The implicit default value for this argument is currently False, but it will be changed to True in Numba 0.59.0. See https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit for details.\u001b[0m\n",
+       "  def hasna(x: np.ndarray) -> bool:\n"
+      ]
+     },
+@@ -390,13 +390,13 @@
+      "traceback": [
+       "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+       "\u001b[0;31mPydanticImportError\u001b[0m                       Traceback (most recent call last)",
+-      "Cell \u001b[0;32mIn[4], line 1\u001b[0m\n\u001b[0;32m----> 1\u001b[0m \u001b[38;5;28;01mimport\u001b[39;00m \u001b[38;5;21;01mpandas_profiling\u001b[39;00m\n\u001b[1;32m      3\u001b[0m profile \u001b[38;5;241m=\u001b[39m pandas_profiling\u001b[38;5;241m.\u001b[39mProfileReport(df)\n\u001b[1;32m      4\u001b[0m profile\u001b[38;5;241m.\u001b[39mto_widgets()\n",
+-      "File \u001b[0;32m~/anaconda3/envs/mlflow-7ef135bbcfcbd50378f5beb8451f0dddc0913a0e/lib/python3.10/site-packages/pandas_profiling/__init__.py:6\u001b[0m\n\u001b[1;32m      1\u001b[0m \u001b[38;5;124;03m\"\"\"Main module of pandas-profiling.\u001b[39;00m\n\u001b[1;32m      2\u001b[0m \n\u001b[1;32m      3\u001b[0m \u001b[38;5;124;03m.. include:: ../../README.md\u001b[39;00m\n\u001b[1;32m      4\u001b[0m \u001b[38;5;124;03m\"\"\"\u001b[39;00m\n\u001b[0;32m----> 6\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mpandas_profiling\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01mcontroller\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m pandas_decorator\n\u001b[1;32m      7\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mpandas_profiling\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01mprofile_report\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m ProfileReport\n\u001b[1;32m      8\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mpandas_profiling\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01mversion\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m __version__\n",
+-      "File \u001b[0;32m~/anaconda3/envs/mlflow-7ef135bbcfcbd50378f5beb8451f0dddc0913a0e/lib/python3.10/site-packages/pandas_profiling/controller/pandas_decorator.py:4\u001b[0m\n\u001b[1;32m      1\u001b[0m \u001b[38;5;124;03m\"\"\"This file add the decorator on the DataFrame object.\"\"\"\u001b[39;00m\n\u001b[1;32m      2\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mpandas\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m DataFrame\n\u001b[0;32m----> 4\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mpandas_profiling\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01mprofile_report\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m ProfileReport\n\u001b[1;32m      7\u001b[0m \u001b[38;5;28;01mdef\u001b[39;00m \u001b[38;5;21mprofile_report\u001b[39m(df: DataFrame, \u001b[38;5;241m*\u001b[39m\u001b[38;5;241m*\u001b[39mkwargs) \u001b[38;5;241m-\u001b[39m\u001b[38;5;241m>\u001b[39m ProfileReport:\n\u001b[1;32m      8\u001b[0m \u001b[38;5;250m    \u001b[39m\u001b[38;5;124;03m\"\"\"Profile a DataFrame.\u001b[39;00m\n\u001b[1;32m      9\u001b[0m \n\u001b[1;32m     10\u001b[0m \u001b[38;5;124;03m    Args:\u001b[39;00m\n\u001b[0;32m   (...)\u001b[0m\n\u001b[1;32m     15\u001b[0m \u001b[38;5;124;03m        A ProfileReport of the DataFrame.\u001b[39;00m\n\u001b[1;32m     16\u001b[0m \u001b[38;5;124;03m    \"\"\"\u001b[39;00m\n",
+-      "File \u001b[0;32m~/anaconda3/envs/mlflow-7ef135bbcfcbd50378f5beb8451f0dddc0913a0e/lib/python3.10/site-packages/pandas_profiling/profile_report.py:13\u001b[0m\n\u001b[1;32m     10\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mtqdm\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01mauto\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m tqdm\n\u001b[1;32m     11\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mvisions\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m VisionsTypeset\n\u001b[0;32m---> 13\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mpandas_profiling\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01mconfig\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m Config, Settings\n\u001b[1;32m     14\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mpandas_profiling\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01mexpectations_report\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m ExpectationsReport\n\u001b[1;32m     15\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mpandas_profiling\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01mmodel\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01malerts\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m AlertType\n",
+-      "File \u001b[0;32m~/anaconda3/envs/mlflow-7ef135bbcfcbd50378f5beb8451f0dddc0913a0e/lib/python3.10/site-packages/pandas_profiling/config.py:6\u001b[0m\n\u001b[1;32m      3\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mtyping\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m Any, Dict, List, Optional\n\u001b[1;32m      5\u001b[0m \u001b[38;5;28;01mimport\u001b[39;00m \u001b[38;5;21;01mmatplotlib\u001b[39;00m\n\u001b[0;32m----> 6\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mpydantic\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m BaseModel, BaseSettings, Field\n\u001b[1;32m      8\u001b[0m matplotlib\u001b[38;5;241m.\u001b[39muse(\u001b[38;5;124m\"\u001b[39m\u001b[38;5;124mAgg\u001b[39m\u001b[38;5;124m\"\u001b[39m)\n\u001b[1;32m     11\u001b[0m \u001b[38;5;28;01mdef\u001b[39;00m \u001b[38;5;21m_merge_dictionaries\u001b[39m(dict1: \u001b[38;5;28mdict\u001b[39m, dict2: \u001b[38;5;28mdict\u001b[39m) \u001b[38;5;241m-\u001b[39m\u001b[38;5;241m>\u001b[39m \u001b[38;5;28mdict\u001b[39m:\n",
+-      "File \u001b[0;32m~/anaconda3/envs/mlflow-7ef135bbcfcbd50378f5beb8451f0dddc0913a0e/lib/python3.10/site-packages/pydantic/__init__.py:218\u001b[0m, in \u001b[0;36m__getattr__\u001b[0;34m(attr_name)\u001b[0m\n\u001b[1;32m    216\u001b[0m dynamic_attr \u001b[38;5;241m=\u001b[39m _dynamic_imports\u001b[38;5;241m.\u001b[39mget(attr_name)\n\u001b[1;32m    217\u001b[0m \u001b[38;5;28;01mif\u001b[39;00m dynamic_attr \u001b[38;5;129;01mis\u001b[39;00m \u001b[38;5;28;01mNone\u001b[39;00m:\n\u001b[0;32m--> 218\u001b[0m     \u001b[38;5;28;01mreturn\u001b[39;00m \u001b[43m_getattr_migration\u001b[49m\u001b[43m(\u001b[49m\u001b[43mattr_name\u001b[49m\u001b[43m)\u001b[49m\n\u001b[1;32m    220\u001b[0m package, module_name \u001b[38;5;241m=\u001b[39m dynamic_attr\n\u001b[1;32m    222\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mimportlib\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m import_module\n",
+-      "File \u001b[0;32m~/anaconda3/envs/mlflow-7ef135bbcfcbd50378f5beb8451f0dddc0913a0e/lib/python3.10/site-packages/pydantic/_migration.py:294\u001b[0m, in \u001b[0;36mgetattr_migration.<locals>.wrapper\u001b[0;34m(name)\u001b[0m\n\u001b[1;32m    292\u001b[0m     \u001b[38;5;28;01mreturn\u001b[39;00m import_string(REDIRECT_TO_V1[import_path])\n\u001b[1;32m    293\u001b[0m \u001b[38;5;28;01mif\u001b[39;00m import_path \u001b[38;5;241m==\u001b[39m \u001b[38;5;124m'\u001b[39m\u001b[38;5;124mpydantic:BaseSettings\u001b[39m\u001b[38;5;124m'\u001b[39m:\n\u001b[0;32m--> 294\u001b[0m     \u001b[38;5;28;01mraise\u001b[39;00m PydanticImportError(\n\u001b[1;32m    295\u001b[0m         \u001b[38;5;124m'\u001b[39m\u001b[38;5;124m`BaseSettings` has been moved to the `pydantic-settings` package. \u001b[39m\u001b[38;5;124m'\u001b[39m\n\u001b[1;32m    296\u001b[0m         \u001b[38;5;124mf\u001b[39m\u001b[38;5;124m'\u001b[39m\u001b[38;5;124mSee https://docs.pydantic.dev/\u001b[39m\u001b[38;5;132;01m{\u001b[39;00mversion_short()\u001b[38;5;132;01m}\u001b[39;00m\u001b[38;5;124m/migration/#basesettings-has-moved-to-pydantic-settings \u001b[39m\u001b[38;5;124m'\u001b[39m\n\u001b[1;32m    297\u001b[0m         \u001b[38;5;124m'\u001b[39m\u001b[38;5;124mfor more details.\u001b[39m\u001b[38;5;124m'\u001b[39m\n\u001b[1;32m    298\u001b[0m     )\n\u001b[1;32m    299\u001b[0m \u001b[38;5;28;01mif\u001b[39;00m import_path \u001b[38;5;129;01min\u001b[39;00m REMOVED_IN_V2:\n\u001b[1;32m    300\u001b[0m     \u001b[38;5;28;01mraise\u001b[39;00m PydanticImportError(\u001b[38;5;124mf\u001b[39m\u001b[38;5;124m'\u001b[39m\u001b[38;5;124m`\u001b[39m\u001b[38;5;132;01m{\u001b[39;00mimport_path\u001b[38;5;132;01m}\u001b[39;00m\u001b[38;5;124m` has been removed in V2.\u001b[39m\u001b[38;5;124m'\u001b[39m)\n",
++      "Cell \u001b[0;32mIn[3], line 1\u001b[0m\n\u001b[0;32m----> 1\u001b[0m \u001b[38;5;28;01mimport\u001b[39;00m \u001b[38;5;21;01mpandas_profiling\u001b[39;00m\n\u001b[1;32m      3\u001b[0m profile \u001b[38;5;241m=\u001b[39m pandas_profiling\u001b[38;5;241m.\u001b[39mProfileReport(df)\n\u001b[1;32m      4\u001b[0m profile\u001b[38;5;241m.\u001b[39mto_widgets()\n",
++      "File \u001b[0;32m~/anaconda3/envs/mlflow-d89679cc87f5287bd6d1873707f52fe35f32fe7f/lib/python3.10/site-packages/pandas_profiling/__init__.py:6\u001b[0m\n\u001b[1;32m      1\u001b[0m \u001b[38;5;124;03m\"\"\"Main module of pandas-profiling.\u001b[39;00m\n\u001b[1;32m      2\u001b[0m \n\u001b[1;32m      3\u001b[0m \u001b[38;5;124;03m.. include:: ../../README.md\u001b[39;00m\n\u001b[1;32m      4\u001b[0m \u001b[38;5;124;03m\"\"\"\u001b[39;00m\n\u001b[0;32m----> 6\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mpandas_profiling\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01mcontroller\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m pandas_decorator\n\u001b[1;32m      7\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mpandas_profiling\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01mprofile_report\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m ProfileReport\n\u001b[1;32m      8\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mpandas_profiling\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01mversion\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m __version__\n",
++      "File \u001b[0;32m~/anaconda3/envs/mlflow-d89679cc87f5287bd6d1873707f52fe35f32fe7f/lib/python3.10/site-packages/pandas_profiling/controller/pandas_decorator.py:4\u001b[0m\n\u001b[1;32m      1\u001b[0m \u001b[38;5;124;03m\"\"\"This file add the decorator on the DataFrame object.\"\"\"\u001b[39;00m\n\u001b[1;32m      2\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mpandas\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m DataFrame\n\u001b[0;32m----> 4\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mpandas_profiling\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01mprofile_report\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m ProfileReport\n\u001b[1;32m      7\u001b[0m \u001b[38;5;28;01mdef\u001b[39;00m \u001b[38;5;21mprofile_report\u001b[39m(df: DataFrame, \u001b[38;5;241m*\u001b[39m\u001b[38;5;241m*\u001b[39mkwargs) \u001b[38;5;241m-\u001b[39m\u001b[38;5;241m>\u001b[39m ProfileReport:\n\u001b[1;32m      8\u001b[0m \u001b[38;5;250m    \u001b[39m\u001b[38;5;124;03m\"\"\"Profile a DataFrame.\u001b[39;00m\n\u001b[1;32m      9\u001b[0m \n\u001b[1;32m     10\u001b[0m \u001b[38;5;124;03m    Args:\u001b[39;00m\n\u001b[0;32m   (...)\u001b[0m\n\u001b[1;32m     15\u001b[0m \u001b[38;5;124;03m        A ProfileReport of the DataFrame.\u001b[39;00m\n\u001b[1;32m     16\u001b[0m \u001b[38;5;124;03m    \"\"\"\u001b[39;00m\n",
++      "File \u001b[0;32m~/anaconda3/envs/mlflow-d89679cc87f5287bd6d1873707f52fe35f32fe7f/lib/python3.10/site-packages/pandas_profiling/profile_report.py:13\u001b[0m\n\u001b[1;32m     10\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mtqdm\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01mauto\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m tqdm\n\u001b[1;32m     11\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mvisions\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m VisionsTypeset\n\u001b[0;32m---> 13\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mpandas_profiling\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01mconfig\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m Config, Settings\n\u001b[1;32m     14\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mpandas_profiling\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01mexpectations_report\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m ExpectationsReport\n\u001b[1;32m     15\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mpandas_profiling\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01mmodel\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01malerts\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m AlertType\n",
++      "File \u001b[0;32m~/anaconda3/envs/mlflow-d89679cc87f5287bd6d1873707f52fe35f32fe7f/lib/python3.10/site-packages/pandas_profiling/config.py:6\u001b[0m\n\u001b[1;32m      3\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mtyping\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m Any, Dict, List, Optional\n\u001b[1;32m      5\u001b[0m \u001b[38;5;28;01mimport\u001b[39;00m \u001b[38;5;21;01mmatplotlib\u001b[39;00m\n\u001b[0;32m----> 6\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mpydantic\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m BaseModel, BaseSettings, Field\n\u001b[1;32m      8\u001b[0m matplotlib\u001b[38;5;241m.\u001b[39muse(\u001b[38;5;124m\"\u001b[39m\u001b[38;5;124mAgg\u001b[39m\u001b[38;5;124m\"\u001b[39m)\n\u001b[1;32m     11\u001b[0m \u001b[38;5;28;01mdef\u001b[39;00m \u001b[38;5;21m_merge_dictionaries\u001b[39m(dict1: \u001b[38;5;28mdict\u001b[39m, dict2: \u001b[38;5;28mdict\u001b[39m) \u001b[38;5;241m-\u001b[39m\u001b[38;5;241m>\u001b[39m \u001b[38;5;28mdict\u001b[39m:\n",
++      "File \u001b[0;32m~/anaconda3/envs/mlflow-d89679cc87f5287bd6d1873707f52fe35f32fe7f/lib/python3.10/site-packages/pydantic/__init__.py:218\u001b[0m, in \u001b[0;36m__getattr__\u001b[0;34m(attr_name)\u001b[0m\n\u001b[1;32m    216\u001b[0m dynamic_attr \u001b[38;5;241m=\u001b[39m _dynamic_imports\u001b[38;5;241m.\u001b[39mget(attr_name)\n\u001b[1;32m    217\u001b[0m \u001b[38;5;28;01mif\u001b[39;00m dynamic_attr \u001b[38;5;129;01mis\u001b[39;00m \u001b[38;5;28;01mNone\u001b[39;00m:\n\u001b[0;32m--> 218\u001b[0m     \u001b[38;5;28;01mreturn\u001b[39;00m \u001b[43m_getattr_migration\u001b[49m\u001b[43m(\u001b[49m\u001b[43mattr_name\u001b[49m\u001b[43m)\u001b[49m\n\u001b[1;32m    220\u001b[0m package, module_name \u001b[38;5;241m=\u001b[39m dynamic_attr\n\u001b[1;32m    222\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mimportlib\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m import_module\n",
++      "File \u001b[0;32m~/anaconda3/envs/mlflow-d89679cc87f5287bd6d1873707f52fe35f32fe7f/lib/python3.10/site-packages/pydantic/_migration.py:294\u001b[0m, in \u001b[0;36mgetattr_migration.<locals>.wrapper\u001b[0;34m(name)\u001b[0m\n\u001b[1;32m    292\u001b[0m     \u001b[38;5;28;01mreturn\u001b[39;00m import_string(REDIRECT_TO_V1[import_path])\n\u001b[1;32m    293\u001b[0m \u001b[38;5;28;01mif\u001b[39;00m import_path \u001b[38;5;241m==\u001b[39m \u001b[38;5;124m'\u001b[39m\u001b[38;5;124mpydantic:BaseSettings\u001b[39m\u001b[38;5;124m'\u001b[39m:\n\u001b[0;32m--> 294\u001b[0m     \u001b[38;5;28;01mraise\u001b[39;00m PydanticImportError(\n\u001b[1;32m    295\u001b[0m         \u001b[38;5;124m'\u001b[39m\u001b[38;5;124m`BaseSettings` has been moved to the `pydantic-settings` package. \u001b[39m\u001b[38;5;124m'\u001b[39m\n\u001b[1;32m    296\u001b[0m         \u001b[38;5;124mf\u001b[39m\u001b[38;5;124m'\u001b[39m\u001b[38;5;124mSee https://docs.pydantic.dev/\u001b[39m\u001b[38;5;132;01m{\u001b[39;00mversion_short()\u001b[38;5;132;01m}\u001b[39;00m\u001b[38;5;124m/migration/#basesettings-has-moved-to-pydantic-settings \u001b[39m\u001b[38;5;124m'\u001b[39m\n\u001b[1;32m    297\u001b[0m         \u001b[38;5;124m'\u001b[39m\u001b[38;5;124mfor more details.\u001b[39m\u001b[38;5;124m'\u001b[39m\n\u001b[1;32m    298\u001b[0m     )\n\u001b[1;32m    299\u001b[0m \u001b[38;5;28;01mif\u001b[39;00m import_path \u001b[38;5;129;01min\u001b[39;00m REMOVED_IN_V2:\n\u001b[1;32m    300\u001b[0m     \u001b[38;5;28;01mraise\u001b[39;00m PydanticImportError(\u001b[38;5;124mf\u001b[39m\u001b[38;5;124m'\u001b[39m\u001b[38;5;124m`\u001b[39m\u001b[38;5;132;01m{\u001b[39;00mimport_path\u001b[38;5;132;01m}\u001b[39;00m\u001b[38;5;124m` has been removed in V2.\u001b[39m\u001b[38;5;124m'\u001b[39m)\n",
+       "\u001b[0;31mPydanticImportError\u001b[0m: `BaseSettings` has been moved to the `pydantic-settings` package. See https://docs.pydantic.dev/2.4/migration/#basesettings-has-moved-to-pydantic-settings for more details.\n\nFor further information visit https://errors.pydantic.dev/2.4/u/import-error"
+      ]
+     },
+@@ -404,9 +404,9 @@
+      "name": "stdout",
+      "output_type": "stream",
+      "text": [
+-      "Error in callback <bound method _WandbInit._pause_backend of <wandb.sdk.wandb_init._WandbInit object at 0x144d0ac50>> (for post_run_cell), with arguments args (<ExecutionResult object at 144c9eef0, execution_count=4 error_before_exec=None error_in_exec=`BaseSettings` has been moved to the `pydantic-settings` package. See https://docs.pydantic.dev/2.4/migration/#basesettings-has-moved-to-pydantic-settings for more details.\n",
++      "Error in callback <bound method _WandbInit._pause_backend of <wandb.sdk.wandb_init._WandbInit object at 0x1065c2140>> (for post_run_cell), with arguments args (<ExecutionResult object at 17ba39de0, execution_count=3 error_before_exec=None error_in_exec=`BaseSettings` has been moved to the `pydantic-settings` package. See https://docs.pydantic.dev/2.4/migration/#basesettings-has-moved-to-pydantic-settings for more details.\n",
+       "\n",
+-      "For further information visit https://errors.pydantic.dev/2.4/u/import-error info=<ExecutionInfo object at 144c9cfa0, raw_cell=\"import pandas_profiling\n",
++      "For further information visit https://errors.pydantic.dev/2.4/u/import-error info=<ExecutionInfo object at 17baf7ee0, raw_cell=\"import pandas_profiling\n",
+       "\n",
+       "profile = pandas_profilin..\" store_history=True silent=False shell_futures=True cell_id=5df11797-a040-4828-89bc-be026819c5dc> result=None>,),kwargs {}:\n"
+      ]
+diff --git a/src/eda/conda.yml b/src/eda/conda.yml
+index 34183ff..95aee05 100644
+--- a/src/eda/conda.yml
++++ b/src/eda/conda.yml
+@@ -3,6 +3,7 @@ channels:
+   - conda-forge
+   - defaults
+ dependencies:
++  - python=3.8
+   - jupyterlab=4.0.7
+   - seaborn=0.13.0
+   - pandas=1.3.5
+@@ -11,5 +12,6 @@ dependencies:
+   - ipywidgets
+   - pandas-profiling=3.1.0 
+   - pyarrow
++  - jinja2=3.0.3
+   - pip:
+       - wandb==0.15.12
+\ No newline at end of file
+diff --git a/src/train_random_forest/run.py b/src/train_random_forest/run.py
+index d8f37d4..f9d4c40 100644
+--- a/src/train_random_forest/run.py
++++ b/src/train_random_forest/run.py
+@@ -9,6 +9,7 @@ import shutil
+ import matplotlib.pyplot as plt
+ 
+ import mlflow
++from mlflow.models import infer_signature
+ import json
+ 
+ import pandas as pd
+@@ -51,11 +52,8 @@ def go(args):
+     # Fix the random seed for the Random Forest, so we get reproducible results
+     rf_config['random_state'] = args.random_seed
+ 
+-    ######################################
+-    # Use run.use_artifact(...).file() to get the train and validation artifact (args.trainval_artifact)
+-    # and save the returned path in train_local_pat
+-    trainval_local_path = # YOUR CODE HERE
+-    ######################################
++    logger.info("Downloading train-validation artifact")
++    trainval_local_path = run.use_artifact(args.trainval_artifact).file()       
+ 
+     X = pd.read_csv(trainval_local_path)
+     y = X.pop("price")  # this removes the column "price" from X and puts it into y
+@@ -67,16 +65,11 @@ def go(args):
+     )
+ 
+     logger.info("Preparing sklearn pipeline")
+-
+     sk_pipe, processed_features = get_inference_pipeline(rf_config, args.max_tfidf_features)
+ 
+     # Then fit it to the X_train, y_train data
+-    logger.info("Fitting")
+-
+-    ######################################
+-    # Fit the pipeline sk_pipe by calling the .fit method on X_train and y_train
+-    # YOUR CODE HERE
+-    ######################################
++    logger.info("Fitting the pipeline")
++    sk_pipe.fit(X_train, y_train)
+ 
+     # Compute r2 and MAE
+     logger.info("Scoring")
+@@ -88,36 +81,41 @@ def go(args):
+     logger.info(f"Score: {r_squared}")
+     logger.info(f"MAE: {mae}")
+ 
+-    logger.info("Exporting model")
+-
++    logger.info("Exporting the model")
+     # Save model package in the MLFlow sklearn format
+     if os.path.exists("random_forest_dir"):
+         shutil.rmtree("random_forest_dir")
+ 
+-    ######################################
+-    # Save the sk_pipe pipeline as a mlflow.sklearn model in the directory "random_forest_dir"
+-    # HINT: use mlflow.sklearn.save_model
+-    # YOUR CODE HERE
+-    ######################################
++    signature = infer_signature(X_val[processed_features], y_pred)
+ 
+-    ######################################
+-    # Upload the model we just exported to W&B
+-    # HINT: use wandb.Artifact to create an artifact. Use args.output_artifact as artifact name, "model_export" as
+-    # type, provide a description and add rf_config as metadata. Then, use the .add_dir method of the artifact instance
+-    # you just created to add the "random_forest_dir" directory to the artifact, and finally use
+-    # run.log_artifact to log the artifact to the run
+-    # YOUR CODE HERE
+-    ######################################
++    path = "random_forest_dir"
++
++    mlflow.sklearn.save_model(
++        sk_pipe, path, 
++        serialization_format=mlflow.sklearn.SERIALIZATION_FORMAT_CLOUDPICKLE, 
++        signature=signature,
++        input_example=X_val.iloc[:2]) 
++
++    artifact = wandb.Artifact(
++        name=args.output_artifact,
++        type="model_export",
++        description="Random Forest model export",
++        metadata=rf_config
++        )
++    
++    artifact.add_dir(path)   
++
++    logger.info("Logging model artifacts")
++    run.log_artifact(artifact)  
+ 
+     # Plot feature importance
+     fig_feat_imp = plot_feature_importance(sk_pipe, processed_features)
+ 
+     ######################################
+-    # Here we save r_squared under the "r2" key
++    # save r_squared under the "r2" key
+     run.summary['r2'] = r_squared
+-    # Now log the variable "mae" under the key "mae".
+-    # YOUR CODE HERE
+-    ######################################
++    # save r_squared under the "mae" key
++    run.summary['mae'] = mae
+ 
+     # Upload to W&B the feture importance visualization
+     run.log(
+@@ -158,7 +156,9 @@ def get_inference_pipeline(rf_config, max_tfidf_features):
+     # Build a pipeline with two steps:
+     # 1 - A SimpleImputer(strategy="most_frequent") to impute missing values
+     # 2 - A OneHotEncoder() step to encode the variable
+-    non_ordinal_categorical_preproc = # YOUR CODE HERE
++    non_ordinal_categorical_preproc = make_pipeline(
++        SimpleImputer(strategy="most_frequent"), OneHotEncoder()
++    )
+     ######################################
+ 
+     # Let's impute the numerical columns to make sure we can handle missing values
+@@ -214,10 +214,12 @@ def get_inference_pipeline(rf_config, max_tfidf_features):
+ 
+     ######################################
+     # Create the inference pipeline. The pipeline must have 2 steps: a step called "preprocessor" applying the
+-    # ColumnTransformer instance that we saved in the `preprocessor` variable, and a step called "random_forest"
+-    # with the random forest instance that we just saved in the `random_forest` variable.
+-    # HINT: Use the explicit Pipeline constructor so you can assign the names to the steps, do not use make_pipeline
+-    sk_pipe = # YOUR CODE HERE
++    sk_pipe = Pipeline(
++        steps=[
++            ("preprocessor", preprocessor),
++            ("random_forest", random_Forest),
++        ]
++    )
+ 
+     return sk_pipe, processed_features
+ 

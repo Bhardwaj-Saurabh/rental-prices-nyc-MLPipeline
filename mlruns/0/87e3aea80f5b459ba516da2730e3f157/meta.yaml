@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/87e3aea80f5b459ba516da2730e3f157/artifacts
+end_time: 1698889105561
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 87e3aea80f5b459ba516da2730e3f157
+run_name: peaceful-midge-960
+run_uuid: 87e3aea80f5b459ba516da2730e3f157
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698889066256
+status: 4
+tags: []
+user_id: saurabhbhardwaj

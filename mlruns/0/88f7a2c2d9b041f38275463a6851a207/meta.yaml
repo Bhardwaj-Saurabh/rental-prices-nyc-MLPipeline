@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/88f7a2c2d9b041f38275463a6851a207/artifacts
+end_time: 1698944555032
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 88f7a2c2d9b041f38275463a6851a207
+run_name: learned-hog-515
+run_uuid: 88f7a2c2d9b041f38275463a6851a207
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698944401704
+status: 3
+tags: []
+user_id: saurabhbhardwaj

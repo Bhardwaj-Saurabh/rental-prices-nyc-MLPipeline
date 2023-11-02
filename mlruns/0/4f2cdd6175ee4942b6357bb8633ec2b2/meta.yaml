@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/4f2cdd6175ee4942b6357bb8633ec2b2/artifacts
+end_time: 1698948016293
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 4f2cdd6175ee4942b6357bb8633ec2b2
+run_name: amazing-finch-273
+run_uuid: 4f2cdd6175ee4942b6357bb8633ec2b2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698947979851
+status: 3
+tags: []
+user_id: saurabhbhardwaj

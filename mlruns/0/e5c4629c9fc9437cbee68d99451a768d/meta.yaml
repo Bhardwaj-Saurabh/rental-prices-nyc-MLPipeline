@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/e5c4629c9fc9437cbee68d99451a768d/artifacts
+end_time: 1698942018954
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: e5c4629c9fc9437cbee68d99451a768d
+run_name: burly-sow-572
+run_uuid: e5c4629c9fc9437cbee68d99451a768d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698941984605
+status: 3
+tags: []
+user_id: saurabhbhardwaj

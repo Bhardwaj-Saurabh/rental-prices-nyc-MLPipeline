@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/ad6205016e4c48e69464ddfa644ac912/artifacts
+end_time: 1698925486382
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: ad6205016e4c48e69464ddfa644ac912
+run_name: bustling-jay-408
+run_uuid: ad6205016e4c48e69464ddfa644ac912
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698925120003
+status: 4
+tags: []
+user_id: saurabhbhardwaj

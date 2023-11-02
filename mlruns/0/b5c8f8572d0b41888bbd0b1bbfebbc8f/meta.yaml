@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/b5c8f8572d0b41888bbd0b1bbfebbc8f/artifacts
+end_time: 1698943954298
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: b5c8f8572d0b41888bbd0b1bbfebbc8f
+run_name: rebellious-seal-633
+run_uuid: b5c8f8572d0b41888bbd0b1bbfebbc8f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698943925340
+status: 3
+tags: []
+user_id: saurabhbhardwaj

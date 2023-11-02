@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/5dbbd8f57b88496e907e7dac788635de/artifacts
+end_time: 1698942428537
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 5dbbd8f57b88496e907e7dac788635de
+run_name: glamorous-newt-736
+run_uuid: 5dbbd8f57b88496e907e7dac788635de
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698942376106
+status: 3
+tags: []
+user_id: saurabhbhardwaj

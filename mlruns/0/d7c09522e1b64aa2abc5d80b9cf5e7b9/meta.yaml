@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/d7c09522e1b64aa2abc5d80b9cf5e7b9/artifacts
+end_time: 1698942974105
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: d7c09522e1b64aa2abc5d80b9cf5e7b9
+run_name: bold-newt-432
+run_uuid: d7c09522e1b64aa2abc5d80b9cf5e7b9
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698942935978
+status: 3
+tags: []
+user_id: saurabhbhardwaj

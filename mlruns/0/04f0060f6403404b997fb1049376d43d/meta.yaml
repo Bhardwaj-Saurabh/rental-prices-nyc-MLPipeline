@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/04f0060f6403404b997fb1049376d43d/artifacts
+end_time: 1698928822263
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 04f0060f6403404b997fb1049376d43d
+run_name: calm-chimp-878
+run_uuid: 04f0060f6403404b997fb1049376d43d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698928758383
+status: 4
+tags: []
+user_id: saurabhbhardwaj

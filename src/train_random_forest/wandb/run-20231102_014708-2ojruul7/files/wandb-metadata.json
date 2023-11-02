@@ -1,0 +1,37 @@
+{
+    "os": "macOS-14.0-arm64-arm-64bit",
+    "python": "3.9.18",
+    "heartbeatAt": "2023-11-02T01:47:09.228826",
+    "startedAt": "2023-11-02T01:47:08.497471",
+    "docker": null,
+    "cpu_count": 10,
+    "cuda": null,
+    "args": [
+        "--trainval_artifact",
+        "trainval_data.csv:latest",
+        "--val_size",
+        "0.2",
+        "--random_seed",
+        "42",
+        "--stratify_by",
+        "neighbourhood_group",
+        "--rf_config",
+        "/Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/outputs/2023-11-02/01-47-04/rf_config.json",
+        "--max_tfidf_features",
+        "5",
+        "--output_artifact",
+        "random_forest_export"
+    ],
+    "state": "running",
+    "program": "/Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/src/train_random_forest/run.py",
+    "codePath": "src/train_random_forest/run.py",
+    "git": {
+        "remote": "https://github.com/Bhardwaj-Saurabh/rental-prices-nyc-MLPipeline.git",
+        "commit": "913c19368d466ab74ed457c3c1c0e09b792a432d"
+    },
+    "email": "aryan.saurabhbhardwaj@gmail.com",
+    "root": "/Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline",
+    "host": "MacBook-Pro.local",
+    "username": "saurabhbhardwaj",
+    "executable": "/Users/saurabhbhardwaj/anaconda3/envs/mlflow-61aab3aca5422098806cb27c174c39ca8c0aee8a/bin/python"
+}

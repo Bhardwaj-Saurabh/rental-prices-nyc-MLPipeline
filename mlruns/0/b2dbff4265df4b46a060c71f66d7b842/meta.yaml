@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/b2dbff4265df4b46a060c71f66d7b842/artifacts
+end_time: 1698941411764
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: b2dbff4265df4b46a060c71f66d7b842
+run_name: lyrical-goose-344
+run_uuid: b2dbff4265df4b46a060c71f66d7b842
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698941356953
+status: 3
+tags: []
+user_id: saurabhbhardwaj

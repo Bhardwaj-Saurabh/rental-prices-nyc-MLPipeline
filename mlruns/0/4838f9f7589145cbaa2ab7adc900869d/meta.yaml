@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/4838f9f7589145cbaa2ab7adc900869d/artifacts
+end_time: 1698940124576
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 4838f9f7589145cbaa2ab7adc900869d
+run_name: merciful-goose-588
+run_uuid: 4838f9f7589145cbaa2ab7adc900869d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698940084059
+status: 3
+tags: []
+user_id: saurabhbhardwaj

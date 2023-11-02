@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/d5f58d3f3de64c06990024413237f585/artifacts
+end_time: 1698939101421
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: d5f58d3f3de64c06990024413237f585
+run_name: rumbling-cow-945
+run_uuid: d5f58d3f3de64c06990024413237f585
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698939076607
+status: 3
+tags: []
+user_id: saurabhbhardwaj

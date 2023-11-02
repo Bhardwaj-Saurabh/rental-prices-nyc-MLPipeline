@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/67ea5285d2fd408d885765547050f957/artifacts
+end_time: 1698942829875
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 67ea5285d2fd408d885765547050f957
+run_name: sincere-shad-154
+run_uuid: 67ea5285d2fd408d885765547050f957
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698942654983
+status: 3
+tags: []
+user_id: saurabhbhardwaj

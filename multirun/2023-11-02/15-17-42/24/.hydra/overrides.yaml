@@ -1,0 +1,5 @@
+- main.steps='train_random_forest'
+- modeling.max_tfidf_features=12
+- modeling.random_forest.max_depth=50
+- modeling.random_forest.n_estimators=200
+- modeling.random_forest.max_features=0.1

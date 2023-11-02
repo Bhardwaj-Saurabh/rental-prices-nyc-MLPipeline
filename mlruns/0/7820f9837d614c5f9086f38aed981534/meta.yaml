@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/7820f9837d614c5f9086f38aed981534/artifacts
+end_time: 1698946714296
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 7820f9837d614c5f9086f38aed981534
+run_name: charming-hen-638
+run_uuid: 7820f9837d614c5f9086f38aed981534
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698946662775
+status: 3
+tags: []
+user_id: saurabhbhardwaj

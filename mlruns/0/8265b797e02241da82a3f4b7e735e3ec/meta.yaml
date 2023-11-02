@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/8265b797e02241da82a3f4b7e735e3ec/artifacts
+end_time: 1698943726952
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 8265b797e02241da82a3f4b7e735e3ec
+run_name: colorful-crow-71
+run_uuid: 8265b797e02241da82a3f4b7e735e3ec
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698943564649
+status: 3
+tags: []
+user_id: saurabhbhardwaj

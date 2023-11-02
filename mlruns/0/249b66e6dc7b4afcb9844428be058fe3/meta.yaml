@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/249b66e6dc7b4afcb9844428be058fe3/artifacts
+end_time: 1698891364552
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 249b66e6dc7b4afcb9844428be058fe3
+run_name: peaceful-gnat-735
+run_uuid: 249b66e6dc7b4afcb9844428be058fe3
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698891262677
+status: 3
+tags: []
+user_id: saurabhbhardwaj

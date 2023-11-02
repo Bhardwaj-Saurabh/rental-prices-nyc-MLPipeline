@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/5df92124ea294881b8079e82ed63fc6f/artifacts
+end_time: 1698945531997
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 5df92124ea294881b8079e82ed63fc6f
+run_name: amusing-moose-849
+run_uuid: 5df92124ea294881b8079e82ed63fc6f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698945437749
+status: 3
+tags: []
+user_id: saurabhbhardwaj

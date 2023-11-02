@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/saurabhbhardwaj/Documents/rental-prices-nyc-MLPipeline/mlruns/0/a23f393e174047fdac0058f78501f604/artifacts
+end_time: 1698945437660
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: a23f393e174047fdac0058f78501f604
+run_name: caring-hog-5
+run_uuid: a23f393e174047fdac0058f78501f604
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1698945363215
+status: 3
+tags: []
+user_id: saurabhbhardwaj
